@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 
 public class StatTrackerListener implements Listener {
@@ -18,25 +19,41 @@ public class StatTrackerListener implements Listener {
 	@EventHandler
 	public void BlockPlaceTracker(BlockPlaceEvent event) {
 		String name = "BlocksPlaced";
-		plugin.set_value(name, plugin.get_value(name) + 1);
+		if (plugin.getConfig().getBoolean(name)) {
+			plugin.set_value(name, plugin.get_value(name) + 1);
+		}
 	}
 	
 	@EventHandler
 	public void BlockBreakTracker(BlockBreakEvent event) {
 		String name = "BlocksBroke";
-		plugin.set_value(name, plugin.get_value(name) + 1);
+		if (plugin.getConfig().getBoolean(name)) {
+			plugin.set_value(name, plugin.get_value(name) + 1);
+		}
 	}
 	
 	@EventHandler
-	public void ItemCraftedTracker(CraftItemEvent event) {
+	public void ItemCraftTracker(CraftItemEvent event) {
 		String name = "ItemsCrafted";
-		plugin.set_value(name, plugin.get_value(name) + 1);
+		if (plugin.getConfig().getBoolean(name)) {
+			plugin.set_value(name, plugin.get_value(name) + 1);
+		}
 	}
 	
 	@EventHandler
 	public void MobDeathTracker(EntityDeathEvent event) {
 		if (event.getEntity() instanceof Monster) {
 			String name = "MobsKilled";
+			if (plugin.getConfig().getBoolean(name)) {
+				plugin.set_value(name, plugin.get_value(name) + 1);
+			}
+		}
+	}
+	
+	@EventHandler
+	public void ArrowFireTracker(EntityShootBowEvent event) {
+		String name = "ArrowsFired";
+		if (plugin.getConfig().getBoolean(name)) {
 			plugin.set_value(name, plugin.get_value(name) + 1);
 		}
 	}

@@ -19,6 +19,8 @@ public class StatTracker extends JavaPlugin {
 	private HashMap<String, Integer> stat_hash = null;
 	
 	public void onEnable() {
+		this.saveDefaultConfig();
+		
 		stat_hash = new HashMap<String, Integer>();
 		try {
 			read_stats();

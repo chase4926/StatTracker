@@ -1,0 +1,6 @@
+# Entries marked true will be tracked, false will not
+MobsKilled: true
+BlocksPlaced: true
+ArrowsFired: true
+ItemsCrafted: true
+BlocksBroke: true
