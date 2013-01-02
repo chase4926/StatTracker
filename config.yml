@@ -1,6 +1,11 @@
 # Entries marked true will be tracked, false will not
-MobsKilled: true
-BlocksPlaced: true
 ArrowsFired: true
-ItemsCrafted: true
 BlocksBroke: true
+BlocksBurned: true
+BlocksPlaced: true
+EggsThrown: true
+ItemsCrafted: true
+MobsKilled: true
+PlayerDeaths: true
+PlayersJoined: true
+SnowballsThrown: true
