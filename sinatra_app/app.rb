@@ -2,7 +2,9 @@
 
 require 'sinatra'
 
-set :port, 4567
+set(:port, 4567)
+set(:views, Proc.new { File.join(root, 'sinatra_files') })
+set(:public_folder, Proc.new { File.join(root, 'sinatra_files') })
 
 
 class FileData
@@ -11,7 +13,10 @@ class FileData
     @file_contents = ''
     @length = 0
     @stat_hash = Hash.new()
-    load_file()
+  end
+  
+  def get_hash()
+    return @stat_hash
   end
   
   def get_by_index(index)
@@ -38,18 +43,33 @@ class FileData
   end
 end
 
+def format_table_row(key, value)
+  return <<-heredoc
+  <tr>
+    <td><p align="left">#{key}</p></td>
+    <td><p align="right">#{value}</p></td>
+  </tr>
+  heredoc
+end
+
+def format_table_rows(hash)
+  result_html = ""
+  hash.each() do |key, value|
+    result_html << format_table_row(key, value)
+  end
+  return result_html
+end
+
 def get_formatted_block(filedata_instance, filename='stats.txt')
   filedata_instance.load_file(filename)
-  result = ''
-  filedata_instance.length.times() do |i|
-    data = filedata_instance.get_by_index(i)
-    result << "#{data[0]} : #{data[1]}<br />\n"
-  end
-  return result
+  return format_table_rows(filedata_instance.get_hash())
 end
+
+
 
 filedata = FileData.new()
 
-get '/' do
-  get_formatted_block(filedata)
+get('/') do
+  @output = get_formatted_block(filedata)
+  erb(:template)
 end
