@@ -43,19 +43,23 @@ class FileData
   end
 end
 
-def format_table_row(key, value)
+def format_table_row(key, value, last=false)
   return <<-heredoc
   <tr>
-    <td><p align="left">#{key}</p></td>
-    <td><p align="right">#{value}</p></td>
+    <td><p align="left">#{key}</p>#{last ? '' : '<hr>'}</td>
+    <td><p align="right">#{value}</p>#{last ? '' : '<hr>'}</td>
   </tr>
   heredoc
 end
 
 def format_table_rows(hash)
   result_html = ""
-  hash.each() do |key, value|
-    result_html << format_table_row(key, value)
+  hash.keys().sort().each_with_index() do |key, i|
+    last = false
+    if i == (hash.length() - 1) then
+      last = true
+    end
+    result_html << format_table_row(key, hash[key], last)
   end
   return result_html
 end
