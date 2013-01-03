@@ -7,21 +7,21 @@ Tracks various statistics over the lifetime of a bukkit minecraft server and sav
 
 ## List of statistics tracked: ##
 
--  ArrowsFired
--  BlocksBroken
--  BlocksBurned
--  BlocksPlaced
--  CreepersExploded
--  EggsThrown
--  ItemsCrafted
--  ItemsEnchanted
--  ItemsSmelted
--  LightningStrikes
--  MobsKilled
--  PetsTamed
--  PlayerDeaths
--  PlayersJoined
--  SnowballsThrown
+-  Arrows Fired
+-  Blocks Broken
+-  Blocks Burned
+-  Blocks Placed
+-  Creepers Exploded
+-  Eggs Thrown
+-  Items Crafted
+-  Items Enchanted
+-  Items Smelted
+-  Lightning Strikes
+-  Mobs Killed
+-  Pets Tamed
+-  Player Deaths
+-  Players Joined
+-  Snowballs Thrown
 
 ## Usage: ##
 
