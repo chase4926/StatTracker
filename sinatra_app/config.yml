@@ -1,0 +1,16 @@
+# Configuration file for Sinatra GrassBlock app
+#
+#
+---
+# Port to use
+port: 4567
+# Server title (leave blank for no title)
+title: 
+# Stylesheet to use
+stylesheet: style.css
+# Footnote to add to bottom (leave blank for no footnote)
+footnote: <p>To find out more about this project, visit our <a href="https://github.com/chase4926/StatTracker">GitHub repository</a>.</p>
+# Set to true to use auto_refresh
+auto_refresh: false
+# Time in seconds for each refresh (requires above to be true)
+auto_refresh_rate: 20
