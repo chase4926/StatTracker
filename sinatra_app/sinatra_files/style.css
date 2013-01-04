@@ -1,3 +1,9 @@
+
+a:link {color:#009633;text-decoration:none;}
+a:visited {color:#009633;text-decoration:none;}
+a:hover {color:#009633;text-decoration:underline;}
+a:active {color:#009633;text-decoration:underline;}
+
 html {
 background-image:url('back.png');
 background-position:right top;
@@ -48,6 +54,23 @@ section#stats p{
 font-family: "Comfortaa", sans-serif;
 color: grey;
 font-size: 20px;
+letter-spacing: 1px;
+}
+
+section#bottom{
+border-radius: 10px;
+background-color: #fff;
+margin: auto;
+opacity: 0.95;
+width: 330px;
+border:4px solid #009900;
+}
+
+section#bottom p{
+font-family: 'Wendy One', sans-serif;
+color: grey;
+font-size: 16px;
+text-align: center;
 letter-spacing: 1px;
 }
 
