@@ -68,7 +68,7 @@ def format_table_rows(hash)
   return result_html
 end
 
-def get_formatted_block(filename='server/stats.txt')
+def get_formatted_block(filename='stats.txt')
   $filedata.load_file(filename)
   return format_table_rows($filedata.get_hash())
 end
