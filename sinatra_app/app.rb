@@ -66,7 +66,7 @@ def format_table_rows(hash)
   return result_html
 end
 
-def get_formatted_block(filedata_instance, filename='server/stats.txt')
+def get_formatted_block(filedata_instance, filename='stats.txt')
   filedata_instance.load_file(filename)
   return format_table_rows(filedata_instance.get_hash())
 end
