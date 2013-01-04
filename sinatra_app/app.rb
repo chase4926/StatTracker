@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'sinatra'
+require_relative 'lib_misc.rb'
+
 
 set(:port, 4567)
 set(:views, Proc.new { File.join(root, 'sinatra_files') })
@@ -43,42 +45,11 @@ class FileData
   end
 end
 
-class String
-  def upcase?()
-    if self == self.upcase() then
-      return true
-    else
-      return false
-    end
-  end
-  
-  def downcase?()
-    return !upcase?()
-  end
-end
-
-
-def de_camelcase(string)
-  string = String.new(string)
-  index_array = Array.new()
-  string.length().times() do |i|
-    if i > 0 and string[i].upcase?() and string[i - 1].downcase?() then
-      index_array << i
-    end
-  end
-  i_add = 0
-  index_array.each() do |i|
-    string.insert(i + i_add, ' ')
-    i_add += 1
-  end
-  return string
-end
-
 def format_table_row(key, value, last=false)
   return <<-heredoc
   <tr>
     <td><p align="left">#{de_camelcase(key) << ':'}</p>#{last ? '' : '<hr>'}</td>
-    <td><p align="right">#{value}</p>#{last ? '' : '<hr>'}</td>
+    <td><p align="right">#{nicen_number(value)}</p>#{last ? '' : '<hr>'}</td>
   </tr>
   heredoc
 end
@@ -95,7 +66,7 @@ def format_table_rows(hash)
   return result_html
 end
 
-def get_formatted_block(filedata_instance, filename='stats.txt')
+def get_formatted_block(filedata_instance, filename='server/stats.txt')
   filedata_instance.load_file(filename)
   return format_table_rows(filedata_instance.get_hash())
 end
