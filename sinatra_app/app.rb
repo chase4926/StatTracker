@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'sinatra'
+require 'yaml'
 require_relative 'lib_misc.rb'
 
+$config = YAML.load_file('config.yml')
 
-set(:port, 4567)
+set(:port, $config['port'])
 set(:views, Proc.new { File.join(root, 'sinatra_files') })
 set(:public_folder, Proc.new { File.join(root, 'sinatra_files') })
 
@@ -66,15 +68,41 @@ def format_table_rows(hash)
   return result_html
 end
 
-def get_formatted_block(filedata_instance, filename='stats.txt')
-  filedata_instance.load_file(filename)
-  return format_table_rows(filedata_instance.get_hash())
+def get_formatted_block(filename='server/stats.txt')
+  $filedata.load_file(filename)
+  return format_table_rows($filedata.get_hash())
 end
 
+def footer()
+  if $config['footnote'] != nil then
+    return "<section id='bottom'>#{$config['footnote']}</section>"
+  end
+end
 
-filedata = FileData.new()
+def auto_refresh()
+  if $config['auto_refresh'] then
+    return '<meta http-equiv="refresh" content="' + $config["auto_refresh_rate"] + '" >'
+  end
+end
+
+def title()
+  if $config['title'] != nil then
+    return "for #{$config['title']}"
+  end
+end
+
+def update_variables()
+  $config = YAML.load_file('config.yml')
+  @output = get_formatted_block()
+  @footer = footer()
+  @title = title()
+  @stylesheet = $config["stylesheet"]
+  @auto_refresh = auto_refresh()
+end
+
+$filedata = FileData.new()
 
 get('/') do
-  @output = get_formatted_block(filedata)
+  update_variables()
   erb(:template)
 end
