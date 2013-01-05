@@ -81,13 +81,13 @@ end
 
 def auto_refresh()
   if $config['auto_refresh'] then
-    return '<meta http-equiv="refresh" content="' + $config["auto_refresh_rate"] + '" >'
+    return "<meta http-equiv='refresh' content='#{$config["auto_refresh_rate"]}' >"
   end
 end
 
 def title()
   if $config['title'] != nil then
-    return "for #{$config['title']}"
+    return " for #{$config['title']}"
   end
 end
 
